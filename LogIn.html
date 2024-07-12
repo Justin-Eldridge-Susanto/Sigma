@@ -6,17 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>HTML + CSS</title>
     <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Days+One&display=swap" rel="stylesheet">
   </head>
 
   <body>
     <div class="gradient"></div>
     <div class="boxlogin">
-    <h1>Login</h1>
+    <h2>Login</h2>
     <h4>Let's get started with sigma.com</h4>
     <form class="form">
       <input type="text" id="LogInName" placeholder="Full name" class="question" required><br>
-      <input type="text" id="LogInPass" placeholder="Password" class="question" required><br><br>
+      <input type="password" id="LogInPass" placeholder="Password" class="question" required><br>
       <p id='incorrect'></p>
+      <input type="checkbox" id="show-password"> 
+      <label for="show-password">Show Password</label><br><br>
+      <script>
+          const showPasswordCheckbox = document.getElementById('show-password');
+        const passwordInput = document.getElementById('LogInPass');
+
+          showPasswordCheckbox.addEventListener('change', function() {
+              passwordInput.type = this.checked ? 'text' : 'password';
+          });
+      </script>
       <input type="submit" class="submit">
     </form>
     </div>
@@ -41,6 +52,7 @@
           console.log(NameData[i])
           if (LogInNameData == NameData[i] && LogInPassData == PassData[i]) {
             console.log("Logged in");
+            localStorage.setItem('Id', i)
             return window.location.href = 'Home.html';
           } else {
               document.getElementById('incorrect').innerHTML = "Incorrect username or password";

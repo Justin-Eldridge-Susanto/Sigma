@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+      <script src="https://kit.fontawesome.com/486029a2dd.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -9,21 +10,95 @@
   </head>
   <body>
     <h1 class="move-right">Welcome to Sigma</h1>
-    <div class="sidenav">
-        <nav>
-            <ul>
-                <li><h1><a href="Home.html">Home</a></h1></li>
-                <li> <a href="Profile.html" class="current">Profile</a></li>
-                <li> <a href="Notifications.html">Notifications</a></li>
-                <li> <a href="Messages.html">Messages</a></li>
-                <li> <a href="Applications.html">Applications</a></li>
-                <li> <a href="Settings.html">Settings</a></li>
-                <li> <a href="Discussion.html">Discussion</a></li>
-                <li> <a href="FAQ.html">FAQ</a></li>
-                <li> <a href="Contact.html">Contact Us></a></li>
-                <li> <a href="Index.html">Log Out</a></li>
-            </ul>
-        </nav>
+      <div class="sidenav">
+      <header>
+          <nav>
+              <ul>
+                <div class = "justin">
+                  <li>
+                    <h1>
+                    <a href="Home.html">Home</a>
+                    <i class="fas fa-home"></i></h1></li>
+                  <li><h1><a href="Profile.html" class = "current spacing">Profile</a>
+                  <i class ="fas fa-person"></i></h1></li>
+                  <li><h1><a href="Notifications.html">Notifications</a>
+                  <i class = "fas fa-bell"></i></h1></li>
+                  <li><h1><a href="Messages.html">Messages</a>
+                  <i class ="fas fa-message"></i></h1></li>
+                  <li><h1><a href="Applications.html">Applications</a>
+                  <i class = "fas fa-desktop"></i></h1></li>
+                  <li><h1><a href="Settings.html">Settings</a>
+                  <i class = "fas fa-gear"></i></h1></li>
+                  <li><h1><a href="FAQ.html">FAQ</a>
+                  <i class = "fas fa-comment"></i></h1></li>
+                  <li><h1><a href="Contact.html">Contact Us</a>
+                  <i class = "fas fa-address-book"></i></h1></li>
+                <li><h1><a href="Index.html">Log Out</a>
+                <i class = "fas fa-right-from-bracket"></i></h1></li>
+                  </div>
+              </ul>
+          </nav>
+        </header>
+      </div>
+      <br><br><br><br><br>
+<div>
+      <img src ="Skibidi Sigma/justindisini.jpg" style ="border-radius :500%; z-index: 5; width :200px ; height:200px; margin-top:-60px; margin-left:50px;"><br><br>
+    <h1 style="margin-left : 45px;">Justin Skibidi</h1>
+     <textarea rows="5" cols="50" id="ShortDesc" placeholder="Short Description"></textarea><br>
+    <textarea rows="5" cols="50" id="WorkExp" placeholder="Work Experience"></textarea><br>
+    <textarea rows="5" cols="50" id="Education" placeholder="Education"></textarea>
+    <textarea rows="5" cols="50" id="Skills" placeholder="Skills"></textarea>
+      <input type="text" id="Skills" placeholder="Skills"> <br>
+      <input type="text" id="AreaOfLiving" placeholder="Area of Living"> <br>
+      <input type="text" id="Achievements" placeholder="Achievements"> <br>
+      <input type="text" id="Languages" placeholder="Languages"> <br>
+      <input type="text" id="Biography" placeholder="Biography"> <br>
+      <button id="edit" onclick="Edit()">Edit</button> 
+      <button id="save" onclick="Save()">Save</button>
     </div>
+      <script>
+          const fields = ['ShortDesc', 'WorkExp', 'Education', 'Skills', 'AreaOfLiving', 'Achievements', 'Languages', 'Biography'];
+          let check;
+
+          fields.forEach(field) => {
+              document.getElementById(field).disabled = true;
+              let data = JSON.parse(localStorage.getItem(field.toLowerCase()) || '[]');
+              if (data.length === 0) {
+                  localStorage.setItem(field.toLowerCase(), '[]');
+                  check = 1;
+              } else if (localStorage.getItem('Id') > data.length - 1) {
+                  document.getElementById(field).value = '';
+                  check = 1;
+                  console.log('one');
+              } else {
+                  document.getElementById(field).value = data[localStorage.getItem('Id')];
+                  check = 0;
+                  console.log('zero');
+              }
+          });
+
+          function Edit() {
+              fields.forEach(field => {
+                  document.getElementById(field).disabled = false;
+              });
+          }
+
+          function Save() {
+              fields.forEach(field) => {
+                  let data = JSON.parse(localStorage.getItem(field.toLowerCase()) || '[]');
+                  let value = document.getElementById(field).value;
+
+                  if (check === 1) {
+                      data.push(value);
+                      localStorage.setItem(field.toLowerCase(), JSON.stringify(data));
+                  } else if (check === 0) {
+                      data[localStorage.getItem('Id')] = value;
+                      localStorage.setItem(field.toLowerCase(), JSON.stringify(data));
+                  }
+
+                  document.getElementById(field).disabled = true;
+              }
+          }
+      </script>
   </body>
 </html>

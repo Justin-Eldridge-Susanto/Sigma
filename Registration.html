@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="styles.css" />
     </head>
     
-    <body><div class="gradient2"></div></div><div class="boxlogin" style="right: 0px;">
+    <body><div class="gradient2"></div></div><div class="boxregist" style="right: 0px;">
         <h1>Sign Up</h1>
         <h4>Let's get started with sigma.com</h4>
         <form class="form">
@@ -78,6 +78,11 @@
                 localStorage.setItem('emaildata', JSON.stringify(emailOldData));
                 localStorage.setItem('phonenum', JSON.stringify(phoneOldData));
                 localStorage.setItem('passdata', JSON.stringify(passOldData));
+
+                let idArray = JSON.parse(localStorage.getItem('fullnamedata'));   
+                console.log(idArray)
+                localStorage.setItem('Id', idArray.indexOf(document.getElementById('name').value))
+                console.log(localStorage.getItem('Id'))
 
                 return window.location.href = 'Home.html';
             }
