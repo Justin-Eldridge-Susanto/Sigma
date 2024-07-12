@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>HTML + CSS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div class="gradient"></div>
+    <div class="boxlogin">
+    <h1>Login</h1>
+    <h4>Let's get started with sigma.com</h4>
+    <form class="form">
+      <input type="text" id="LogInName" placeholder="Full name" class="question" required><br>
+      <input type="text" id="LogInPass" placeholder="Password" class="question" required><br><br>
+      <p id='incorrect'></p>
+      <input type="submit" class="submit">
+    </form>
+    </div>
+    <script>
+      const form = document.querySelector('form'); 
+
+      form.addEventListener('submit', function(event) { 
+          event.preventDefault();
+        
+        var LogInNameData = document.getElementById("LogInName").value;
+        var LogInPassData = document.getElementById("LogInPass").value;
+        var NameData = JSON.parse(localStorage.getItem("fullnamedata"));
+        var PassData = JSON.parse(localStorage.getItem("passdata"));
+        console.log(LogInNameData)
+        console.log(LogInPassData)
+        console.log(NameData)
+        console.log(PassData)
+        console.log()
+
+
+        for (let i =0;i < NameData.length; i++) {
+          console.log(NameData[i])
+          if (LogInNameData == NameData[i] && LogInPassData == PassData[i]) {
+            console.log("Logged in");
+            return window.location.href = 'Home.html';
+          } else {
+              document.getElementById('incorrect').innerHTML = "Incorrect username or password";
+            }
+          
+        }
+      });
+    </script>
+  </body>
+</html>

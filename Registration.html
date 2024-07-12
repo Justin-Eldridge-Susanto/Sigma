@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>HTML + CSS</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    
+    <body><div class="gradient2"></div></div><div class="boxlogin" style="right: 0px;">
+        <h1>Sign Up</h1>
+        <h4>Let's get started with sigma.com</h4>
+        <form class="form">
+            <input type="text" id="name"  placeholder="Full name" class="question" required><br>
+            <input type="text" id="age" placeholder="Age" class="question"required><br>
+            <input type="email" id="email"  placeholder="E-mail" class="question"required><br>
+            <input type="number" id="Pnumber"  placeholder="Phone number" class="question"required><br>
+            <input type="password" id="password" placeholder="Password" class="question"required><br>
+            <input type="password" id="confirmPassword" placeholder="Confirm password" class="question"required><br><p id="incorrect"></p>
+            <input type='submit' class="submit">
+        </form>
+        </div>
+        <script>
+            const form = document.querySelector('form'); 
+
+            form.addEventListener('submit', function(event) { 
+                event.preventDefault();
+
+                var pass = document.getElementById('password').value
+                var confirmPass = document.getElementById('confirmPassword').value
+
+                if(pass == confirmPass) {
+                    document.getElementById('incorrect').innerHTML = ''
+                    save()
+                } else if(pass != confirmPass){
+                    document.getElementById('confirmPassword').value = ''
+                    document.getElementById('incorrect').innerHTML = 'Incorrect password'
+                    }
+            });
+
+            function save() {
+                var fullNameData = document.getElementById('name').value
+                var ageNum = document.getElementById('age').value
+                var emailData = document.getElementById('email').value
+                var phoneNum = document.getElementById('Pnumber').value
+                var pass = document.getElementById('password').value
+
+                if(localStorage.getItem('fullnamedata') == null) {
+                    localStorage.setItem('fullnamedata', '[]');
+                }
+                if(localStorage.getItem('agenum') == null) {
+                    localStorage.setItem('agenum', '[]');
+                }
+                if(localStorage.getItem('emaildata') == null) {
+                    localStorage.setItem('emaildata', '[]');
+                }
+                if(localStorage.getItem('phonenum') == null) {
+                    localStorage.setItem('phonenum', '[]');
+                }
+                if(localStorage.getItem('passdata') == null) {
+                    localStorage.setItem('passdata', '[]');
+                }
+
+                var fullNameOldData = JSON.parse(localStorage.getItem('fullnamedata'));
+                fullNameOldData.push(fullNameData);
+                var ageOldData = JSON.parse(localStorage.getItem('agenum'));
+                ageOldData.push(ageNum);
+                var emailOldData = JSON.parse(localStorage.getItem('emaildata'));
+                emailOldData.push(emailData);
+                var phoneOldData = JSON.parse(localStorage.getItem('phonenum'));
+                phoneOldData.push(phoneNum);
+                var passOldData = JSON.parse(localStorage.getItem('passdata'));
+                passOldData.push(pass);
+
+                localStorage.setItem('fullnamedata', JSON.stringify(fullNameOldData));
+                localStorage.setItem('agenum', JSON.stringify(ageOldData));
+                localStorage.setItem('emaildata', JSON.stringify(emailOldData));
+                localStorage.setItem('phonenum', JSON.stringify(phoneOldData));
+                localStorage.setItem('passdata', JSON.stringify(passOldData));
+
+                return window.location.href = 'Home.html';
+            }
+        </script>
+    </body>
+</html>
